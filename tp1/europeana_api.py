@@ -15,17 +15,20 @@ if not API_KEY:
 
 # Configuration de la recherche
 API_URL = "https://api.europeana.eu/fulltext/search.json"
-search_term = "journalisme belge"
+
+search_term = "Belgian journalism"
+
+params = {
+    "query": search_term,
+    "theme": "newspaper",
+    "rows": 20,
+    "profile": "rich"
+}
 
 headers = {
     "X-Api-Key": API_KEY
 }
 
-params = {
-    "query": f'fulltext:"{search_term}"',
-    "rows": 20,
-    "profile": "rich"
-}
 
 
 # Appel de l'API
@@ -74,4 +77,12 @@ df = pd.DataFrame(
     ]
 )
 
-df
+#df
+
+OUTPUT_DIRECTORY = "data/tp1"
+os.makedirs(OUTPUT_DIRECTORY, exist_ok=True)
+
+df.to_csv(
+    f"{OUTPUT_DIRECTORY}/europeana_newspapers.csv",
+    index=False
+)

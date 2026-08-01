@@ -40,3 +40,38 @@ response.raise_for_status()
 data = response.json()
 
 print(f"Nombre total de résultats : {data['totalResults']}")
+
+
+results = []
+
+for item in data["items"]:
+    title = item.get("title", [""])[0]
+    creator = item.get("dcCreator", [""])[0]
+    year = item.get("year", [""])[0]
+    country = item.get("country", [""])[0]
+    provider = item.get("dataProvider", [""])[0]
+    link = item.get("guid", "")
+
+    results.append([
+        title,
+        creator,
+        year,
+        country,
+        provider,
+        link
+    ])
+
+
+df = pd.DataFrame(
+    results,
+    columns=[
+        "title",
+        "creator",
+        "year",
+        "country",
+        "provider",
+        "link"
+    ]
+)
+
+df

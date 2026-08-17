@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 
 query = "cinema"
 language = "fr-BE"
-year_from = 1885
-year_to = 1960
+year_from = 1954
+year_to = 1955
 
 papers = {
     "JB427": "La Libre Belgique",

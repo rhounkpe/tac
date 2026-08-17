@@ -4,6 +4,7 @@ from pathlib import Path
 from urllib.parse import urljoin
 
 import requests
+import pandas as pd
 from bs4 import BeautifulSoup
 
 BASE_URL = "https://camille.ulb.be/"
@@ -86,5 +87,11 @@ if xlsx_url:
     output_file.write_bytes(export.content)
 
     print("Export XLSX :", output_file)
+
+    # Vérifier le contenu du corpus exporté
+    df = pd.read_excel(output_file)
+
+    print("Nombre de documents :", len(df))
+    print("Colonnes disponibles :", df.columns.tolist())
 else:
     print("Lien XLSX non trouvé.")

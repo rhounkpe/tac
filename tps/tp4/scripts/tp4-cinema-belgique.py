@@ -6,12 +6,16 @@ from bs4 import BeautifulSoup
 
 query = "cinema"
 language = "fr-BE"
+year_from = 1885
+year_to = 1960
 
 response = requests.get(
     "https://camille.ulb.be/",
     params={
         "query": query,
         "language": language,
+        "year_from": year_from,
+        "year_to": year_to,
     },
     headers={
         "Cookie": os.environ["CAMILLE_COOKIE"]

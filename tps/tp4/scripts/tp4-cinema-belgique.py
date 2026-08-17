@@ -1,6 +1,7 @@
 import os
 
 import requests
+from bs4 import BeautifulSoup
 
 
 query = "cinema"
@@ -16,7 +17,13 @@ response = requests.get(
     timeout=30,
 )
 
+response.raise_for_status()
+
+soup = BeautifulSoup(response.text, "html.parser")
+
 print("Recherche :", query)
-print("Status :", response.status_code)
-print("URL :", response.url)
-print("Taille de la réponse :", len(response.text), "caractères")
+
+for text in soup.stripped_strings:
+    if "résultats (" in text.lower():
+        print(text)
+        break
